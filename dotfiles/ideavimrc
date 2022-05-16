@@ -3,9 +3,37 @@
 set showmode
 set NERDTree
 set easymotion
+set multiple-cursors
+set relativenumber
 
 nnoremap <SPACE> <Nop>
+nnoremap S <Nop>
+nnoremap s <Nop>
 let mapleader=" "
+
+
+"" Easy motion mappings
+"search word down
+map s <Plug>(easymotion-w)
+nmap s <Plug>(easymotion-w)
+
+"search word up
+map S <Plug>(easymotion-b)
+nmap S <Plug>(easymotion-b)
+
+
+"nerd tree toggle
+nmap <leader>nto :NERDTreeToggle<CR>
+nmap <leader>ntf :NERDTreeFocus<CR>
+
+"switching between splits
+nnoremap <LEADER>j <C-W><C-J>
+nnoremap <LEADER>k <C-W><C-K>
+nnoremap <LEADER>l <C-W><C-L>
+nnoremap <LEADER>h <C-W><C-H>
+
+"open fuzzy finder
+nmap <leader>f :action GotoFile<CR>
 
 "" -- Suggested options --
 " Show a few lines of context around the cursor. Note that this makes the
