@@ -1,29 +1,42 @@
 call plug#begin()
 Plug 'preservim/NERDTree'
 Plug 'kyazdani42/nvim-web-devicons'  
-Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
 Plug 'mattn/emmet-vim'
-Plug 'itchyny/lightline.vim'
-Plug 'chriskempson/base16-vim'
-Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
+Plug 'vim-airline/vim-airline'
+Plug 'arcticicestudio/nord-vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-startify'
 Plug 'kdheepak/lazygit.nvim'
 Plug 'ap/vim-css-color'
-Plug 'daviesjamie/vim-base16-lightline'
 Plug 'easymotion/vim-easymotion'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'junegunn/fzf'
 Plug 'airblade/vim-rooter'
+Plug 'neovim/nvim-lspconfig'
+Plug 'wesQ3/vim-windowswap'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'ThePrimeagen/harpoon'
 call plug#end()
 
 
 set termguicolors
-colorscheme base16-default-dark
+colorscheme nord
 
 nnoremap <SPACE> <Nop>
 map <Space> <Leader>
+
+" lua file
+lua require('init')
+
+"harpoon
+nnoremap <leader>hh :lua require("harpoon.ui").toggle_quick_menu()<CR>
+nnoremap <leader>ha :lua require("harpoon.mark").add_file()<CR>
+
+nnoremap <leader>h1 :lua require("harpoon.ui").nav_file(1)
+nnoremap <leader>h2 :lua require("harpoon.ui").nav_file(2)
+nnoremap <leader>h3 :lua require("harpoon.ui").nav_file(3)
+nnoremap <leader>h4 :lua require("harpoon.ui").nav_file(4)
 
 
 "fuzzy finder
@@ -36,18 +49,33 @@ noremap <Leader>p "*p
 noremap <Leader>Y "+y
 noremap <Leader>P "+p
 
+
+
 "minimap
 let g:minimap_width = 10
 let g:minimap_auto_start = 1
 let g:minimap_auto_start_win_enter = 1
 
+" airline
+let g:airline_powerline_fonts = 1
+if !exists('g:airline_symbols')
+	let g:airline_symbols = {}
+endif
+
+let g:airline_symbols.colnr = '|'
+let g:airline_section_error = ''
+let g:airline_skip_empty_sections = 1
 " Lightline
-let g:lightline = {
-      \ 'colorscheme': 'base16', 
-      \ }
-set laststatus=2
+"let g:lightline = {
+"      \ 'colorscheme': 'base16', 
+"      \ }
 " LazyGit
 nnoremap <silent> <leader>gl :LazyGit<CR>
+
+
+"window swap
+let g:windowswap_map_keys = 0 "prevent default bindings
+nnoremap <silent> <leader>w :call WindowSwap#EasyWindowSwap()<CR>
 
 "Telescope	
 "nnoremap <leader>ff <cmd>Telescope find_files<cr>
@@ -59,11 +87,6 @@ nnoremap <silent> <leader>gl :LazyGit<CR>
 
 "bufferline
 
-lua << EOF
-require('bufferline').setup {
-		separator_style = "paddedslant" 
-}
-EOF
 
 "easymotion
 " Move to char
@@ -93,23 +116,24 @@ nmap <LEADER>ntt :NERDTreeFind<CR>
 let g:NERDTreeDirArrowExpandable = '|'
 let g:NERDTreeDirArrowCollapsible = '~'
 let nerdtreeshowlinenumbers=1
+let g:NERDTreeWinPos = "right"
 autocmd FileType nerdtree setlocal relativenumber
 
 
 " coc
 
-function! s:check_back_space() abort
-let col = col('.') - 1
-return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
+" function! s:check_back_space() abort
+" let col = col('.') - 1
+" return !col || getline('.')[col - 1]  =~ '\s'
+" endfunction
+" 
+" inoremap <silent><expr> <TAB>
+" 	  \ pumvisible() ? "\<C-n>" :
+" 	  \ <SID>check_back_space() ? "\<TAB>" :
+" 	  \ coc#refresh()
 
-inoremap <silent><expr> <TAB>
-	  \ pumvisible() ? "\<C-n>" :
-	  \ <SID>check_back_space() ? "\<TAB>" :
-	  \ coc#refresh()
 
-
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
+"inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
 
 "vim
 nmap <LEADER>tn :tabnew<CR>
@@ -117,10 +141,13 @@ nnoremap <LEADER>j <C-W><C-J>
 nnoremap <LEADER>k <C-W><C-K>
 nnoremap <LEADER>l <C-W><C-L>
 nnoremap <LEADER>h <C-W><C-H>
+nnoremap <leader> b :buffers<CR>
 set mouse=a
 set scrolloff=8
 set number relativenumber
 set nu rnu
+set laststatus=3
+highlight WinSeperator guibg=None
 set showtabline=2
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set autochdir
