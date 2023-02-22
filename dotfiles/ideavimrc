@@ -5,35 +5,42 @@ set NERDTree
 set easymotion
 set multiple-cursors
 set relativenumber
+set scrolloff=5
+set ignorecase
 
+"leader remap
 nnoremap <SPACE> <Nop>
-nnoremap S <Nop>
-nnoremap s <Nop>
 let mapleader=" "
-
 
 "" Easy motion mappings
 "search word down
-map s <Plug>(easymotion-w)
-nmap s <Plug>(easymotion-w)
+map s <Plug>(easymotion-bd-f)
 
-"search word up
-map S <Plug>(easymotion-b)
-nmap S <Plug>(easymotion-b)
-
-
-"nerd tree toggle
-nmap <leader>nto :NERDTreeToggle<CR>
+"nerd tree
+nmap <leader>ntt :NERDTreeToggle<CR>
 nmap <leader>ntf :NERDTreeFocus<CR>
 
+"splits
 "switching between splits
 nnoremap <LEADER>j <C-W><C-J>
 nnoremap <LEADER>k <C-W><C-K>
 nnoremap <LEADER>l <C-W><C-L>
 nnoremap <LEADER>h <C-W><C-H>
 
-"open fuzzy finder
-nmap <leader>f :action GotoFile<CR>
+"easy splitting
+nnoremap <LEADER>sv :vsplit<CR>
+nnoremap <LEADER>sd :split<CR>
+
+"open fuzzy finder/action bar
+map <leader>ff <Action>(GotoFile)
+map <leader>fs <Action>(GotoSymbol)
+map <leader>fa <Action>(GotoAction)
+
+
+"honestly could be an alternative to ff, will comment it out for now
+"map <leader>g <Action>(FindInPath)
+"actually pretty useful
+map <leader>b <Action>(Switcher)
 
 "" -- Suggested options --
 " Show a few lines of context around the cursor. Note that this makes the
@@ -56,6 +63,5 @@ nmap <leader>f :action GotoFile<CR>
 
 "" Map \b to toggle the breakpoint on the current line
 "map \b <Action>(ToggleLineBreakpoint)
-
 
 " Find more examples here: https://jb.gg/share-ideavimrc
