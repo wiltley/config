@@ -1,10 +1,15 @@
+
+#env TERM=screen-256color tmux
 # List of plugins
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'tmux-plugins/tmux-sensible'
-set -g @plugin "arcticicestudio/nord-tmux"
+set -g @plugin 'odedlaz/tmux-onedark-theme'
 
 set -g mouse on
 set -g base-index 1
+
+
+set-option -ga terminal-overrides ",xterm-256color:Tc"
 
 
 # use <prefix> s for horizontal split
@@ -12,7 +17,7 @@ bind s split-window -v
 # use <prefix> v for vertical split
 bind v split-window -h
 
-
+# bind choose session
 
 bind h select-pane -L
 bind j select-pane -D
