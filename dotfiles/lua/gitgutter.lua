@@ -1,0 +1,6 @@
+vim.keymap.set("n","<leader>ghp" ,":GitGutterPreviewHunk<CR>")
+vim.keymap.set("n", "<leader>ghs", ":GitGutterStageHunk<CR>")
+vim.keymap.set("n", "<leader>ghu", ":GitGutterUndoHunk<CR>")
+vim.keymap.set("n", "<leader>ghn", ":GitGutterNextHunk<CR>")
+vim.keymap.set("n", "<leader>ghb", ":GitGutterPrevHunk<CR>")
+vim.keymap.set("n", "<leader>ghd",":GitGutterDiffOrig<CR>")

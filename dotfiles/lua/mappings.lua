@@ -20,6 +20,22 @@ map("n", "<leader>ntf", ":NvimTreeFocus<CR>")
 
 map("n", "<leader>mm", ":lua require(\"harpoon.ui\").toggle_quick_menu()<CR>")
 
+-- undo tree
+vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
+
+-- don't ask me how this works. shoutout primeagen
+-- moves files up and down
+map("v", "J", ":m '>+1<CR>gv=gv")
+map("v", "K", ":m '<-2<CR>gv=gv")
+
+--- tab traversal
+--noremap <leader>1 1gt
+map("n","<leader>1", "1gt")
+map("n","<leader>2", "2gt")
+map("n","<leader>3", "3gt")
+map("n","<leader>4", "4gt")
+map("n","<leader>5", "5gt")
+map("n","<leader>6", "6gt")
 
 --nnoremap <leader>ma :lua require("harpoon.mark").add_file()<CR>
 
