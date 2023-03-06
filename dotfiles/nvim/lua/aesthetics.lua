@@ -1,6 +1,8 @@
 
 vim.cmd [[set termguicolors]]
-vim.cmd [[colorscheme xcodedark]]
+
+-- colorscheme  
+require('onedark').load()
 
 -- hardline --
 require('hardline').setup {}
@@ -11,18 +13,19 @@ require("bufferline").setup{
 		modified_icon = "●",
 		buffer_close_icon = "",
 		close_icon = "",
-		left_trunc_marker = "",
-		right_trunc_marker = "",
+		--left_trunc_marker = "",
+        separator_style = "padded_slant",
+		--right_trunc_marker = "",
 		numbers = "ordinal",
 		mode = "tabs",
 		max_name_length = 15,
 		max_prefix_length = 6,
-		diagnostics = "coc",
 		show_buffer_icons = true,
-		show_buffer_close_icons = false,
-		show_close_icon = false,
+		show_buffer_close_icons = true,
+		show_close_icon = true,
 		persist_buffer_sort = true,
 		enforce_regular_tabs = true,
+		diagnostics = "nvim_lsp",
 		diagnostics_indicator = function(count, level)
 		  local icon = level:match("error") and "" or ""
 		  return icon .. count

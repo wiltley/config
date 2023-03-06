@@ -5,7 +5,7 @@ local lsp = require('lsp-zero').preset({
 
 
 lsp.ensure_installed({
-  'gopls',
+  'gopls', 'clangd',
 })
 -- fix for undefined global
 lsp.configure('lua-language-server', {
@@ -43,6 +43,7 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set("n", "<leader>rr", function() vim.lsp.buf.references() end, opts)
   vim.keymap.set("n", "<leader>rn", function() vim.lsp.buf.rename() end, opts)
   vim.keymap.set("n", "<leader>sh", function() vim.lsp.buf.signature_help() end, opts)
+  vim.keymap.set("n", "<leader>lf", ":LspZeroFormat<CR>")
 end)
 
 local cmp = require('cmp')
@@ -54,8 +55,9 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
     ["<C-Space>"] = cmp.mapping.complete(),
 })
 
---cmp_mappings['<Tab>'] = nil
---cmp_mappings['<S-Tab>'] = nil
+cmp_mappings['<Tab>'] = nil
+cmp_mappings['<S-Tab>'] = nil
+
 
 lsp.setup_nvim_cmp({
   mapping = cmp_mappings

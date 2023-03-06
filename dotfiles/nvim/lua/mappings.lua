@@ -1,4 +1,4 @@
-
+ -- LSP mappings are in it's own file
 vim.g.mapleader = ' '
 
 -- define new mapping --
@@ -8,9 +8,8 @@ local function map(mode, lhs, rhs, opts)
   vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
-
--- lightspeed --
-map("n", "s", "<Plug>Lightspeed_omni_s")
+--  easymotion 
+map("n","s", "<Plug>(easymotion-overwin-f)")
 
 -- lazygit -- 
 map("n", "<leader>gl", ":Lazygit<CR>")
@@ -21,32 +20,22 @@ map("n", "<leader>ntf", ":NvimTreeFocus<CR>")
 
 map("n", "<leader>mm", ":lua require(\"harpoon.ui\").toggle_quick_menu()<CR>")
 
+-- undo tree
+vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 
--- lsp
+-- don't ask me how this works. shoutout primeagen
+-- moves files up and down
+map("v", "J", ":m '>+1<CR>gv=gv")
+map("v", "K", ":m '<-2<CR>gv=gv")
 
-local lspconfig = require 'lspconfig'
-local on_attach = function(_, bufnr)
-  local opts = { buffer = bufnr }
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-  vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
-  vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts)
-  vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, opts)
-  vim.keymap.set('n', '<leader>wl', function()
-    vim.inspect(vim.lsp.buf.list_workspace_folders())
-  end, opts)
-  vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts)
-  vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
-  vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-  vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
-  vim.keymap.set('n', '<leader>so', require('telescope.builtin').lsp_document_symbols, opts)
-  vim.api.nvim_create_user_command("Format", vim.lsp.buf.formatting, {})
-end
-
-
-
+--- tab traversal
+--noremap <leader>1 1gt
+map("n","<leader>1", "1gt")
+map("n","<leader>2", "2gt")
+map("n","<leader>3", "3gt")
+map("n","<leader>4", "4gt")
+map("n","<leader>5", "5gt")
+map("n","<leader>6", "6gt")
 
 --nnoremap <leader>ma :lua require("harpoon.mark").add_file()<CR>
 
