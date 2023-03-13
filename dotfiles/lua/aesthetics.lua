@@ -1,33 +1,45 @@
-
 vim.cmd [[set termguicolors]]
+--Lua:
 
--- colorscheme  
-require('onedark').load()
+vim.cmd("colorscheme kanagawa")
+--require('onedark').setup {
+    -- style = "warmer",
+--}
+--require('onedark').load()
 
 -- hardline --
-require('hardline').setup {}
+require('hardline').setup {
+    bufferline = true,
+    bufferline_settings = {
+        show_index = false,        -- show buffer indexes (not the actual buffer numbers) in bufferline
+  },
+}
 
- -- bufferline --
 require("bufferline").setup{
+ -- bufferline --
 	options = {
-		modified_icon = "●",
-		buffer_close_icon = "",
+		modified_icon = "[+]",
+		buffer_close_icon = "X",
 		close_icon = "",
-		--left_trunc_marker = "",
-        separator_style = "padded_slant",
-		--right_trunc_marker = "",
-		numbers = "ordinal",
-		mode = "tabs",
-		max_name_length = 15,
+        separator_style = "thin", -- On kitty slant works but now padded slant
+--  	numbers = "ordinal",
+--		numbers = function(opts)
+        numbers = function(opts) -- My beloved
+          if vim.api.nvim_get_current_buf() == opts.id then return "" end
+          return opts.id
+        end,
+        color_icons = false, -- whether or not to add the filetype icon highlights
+		mode = "buffers",
+		max_name_length = 18,
 		max_prefix_length = 6,
-		show_buffer_icons = true,
-		show_buffer_close_icons = true,
-		show_close_icon = true,
+		show_buffer_icons = false,
+		show_buffer_close_icons = false,
+		show_close_icon = false,
 		persist_buffer_sort = true,
-		enforce_regular_tabs = true,
+		enforce_regular_tabs = false,
 		diagnostics = "nvim_lsp",
 		diagnostics_indicator = function(count, level)
-		  local icon = level:match("error") and "" or ""
+		  local icon = level:match("error") and "E" or "W" --     Bugged on kitty
 		  return icon .. count
     end,
   },

@@ -6,14 +6,17 @@ vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 vim.keymap.set('n', '<leader>fe', builtin.diagnostics, {})
 vim.keymap.set('n', '<leader>fs', builtin.lsp_workspace_symbols, {})
-vim.keymap.set('n', '<leader>fo', builtin.oldfiles, {}) 
+vim.keymap.set('n', '<leader>fo', builtin.oldfiles, {})
 vim.keymap.set('n', '<leader>ft' , builtin.treesitter, {})
-vim.keymap.set('n', '<leader>fb' , builtin.git_branches, {})
+vim.keymap.set('n', '<leader>fb' , builtin.buffers, {})
 vim.keymap.set('n', '<leader>fr', builtin.lsp_references, {}) -- Add jump type option to tab
 vim.keymap.set('n', '<leader>fd' , builtin.lsp_definitions, {}) -- Add jump type option to tab
 vim.keymap.set('n', '<leader>fm' , builtin.marks, {})
 vim.keymap.set('n', '<leader>fj', builtin.jumplist, {})
 vim.keymap.set('n', '<leader>fi', builtin.lsp_implementations, {}) -- Add jump type option to tab
+
+--local actions = require('telescope.actions')
+--vim.keymap.set('n', '<leader>bd', actions.delete_buffer, {})
 
 local telescope = require("telescope")
 telescope.setup {

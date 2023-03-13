@@ -4,7 +4,7 @@
 -- vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
-	use 'navarasu/onedark.nvim'
+    use 'navarasu/onedark.nvim'
     use 'MunifTanjim/prettier.nvim'
 	use 'ojroques/nvim-hardline'
 	use 'arzg/vim-colors-xcode'
@@ -14,20 +14,26 @@ return require('packer').startup(function(use)
     use 'ryanoasis/vim-devicons'
     use 'theHamsta/nvim-dap-virtual-text'
 	use 'airblade/vim-rooter'
+    use 'stevearc/overseer.nvim'
 	use 'wesQ3/vim-windowswap'
     use 'mbbill/undotree'
 	use 'nvim-lua/plenary.nvim'
+--    use 'shaunsingh/nord.nvim'
 	use 'ThePrimeagen/harpoon'
     use 'kdheepak/lazygit.nvim'
 	use 'danilamihailov/beacon.nvim'
 	use 'easymotion/vim-easymotion'
 	use 'kyazdani42/nvim-web-devicons'
     use 'tmsvg/pear-tree'
+    use 'fgheng/winbar.nvim'
+    use 'ggandor/leap.nvim'
     --use 'airblade/vim-gitgutter'
     use "lukas-reineke/indent-blankline.nvim"
     use 'nvim-telescope/telescope-hop.nvim'
     use 'jose-elias-alvarez/null-ls.nvim'
     use 'lewis6991/gitsigns.nvim'
+    use 'rebelot/kanagawa.nvim'
+    use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
     use {
       "folke/trouble.nvim",
       requires = "nvim-tree/nvim-web-devicons",
@@ -38,6 +44,24 @@ return require('packer').startup(function(use)
     use {
       'nvim-lualine/lualine.nvim',
       requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+    }
+    use({
+    "glepnir/lspsaga.nvim",
+    branch = "main",
+    requires = {
+        {"nvim-tree/nvim-web-devicons"},
+        --Please make sure you install markdown and markdown_inline parser
+        {"nvim-treesitter/nvim-treesitter"}
+        }
+    })
+    use {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v2.x",
+    requires = { 
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
+        }
     }
     use {"akinsho/toggleterm.nvim", tag = '*', config = function()
       require("toggleterm").setup()
